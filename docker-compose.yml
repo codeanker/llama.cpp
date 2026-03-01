@@ -1,0 +1,15 @@
+services:
+  server-cuda:
+    image: ghcr.io/${GITHUB_USER:-codeanker}/llama.cpp:server-cuda
+    ports:
+      - "${HOST_PORT:-8080}:8080"
+    volumes:
+      - ${MODEL_DIR:-./models}:/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    command: -m /models/${MODEL_NAME:-model.gguf} --host 0.0.0.0 --port 8080
