@@ -5,9 +5,9 @@ FROM ubuntu:$UBUNTU_VERSION AS build
 ARG TARGETARCH
 
 RUN apt-get update && \
-    apt-get install -y gcc-14 g++-14 build-essential git cmake libssl-dev
+    apt-get install -y build-essential git cmake libssl-dev
 
-ENV CC=gcc-14 CXX=g++-14
+ENV CC=gcc CXX=g++
 
 WORKDIR /app
 
